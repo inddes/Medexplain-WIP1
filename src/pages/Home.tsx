@@ -134,26 +134,10 @@ export default function Home() {
 
         <footer className="mt-20 border-t border-gray-200 bg-white/50 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">M</span>
-                </div>
-                <span className="text-lg font-semibold text-gray-900">MedExplain</span>
-              </div>
-
+            <div className="flex justify-center">
               <p className="text-sm text-gray-600">
                 © MedExplain 2025. All rights reserved. Educational purposes only.
               </p>
-
-              <div className="flex items-center space-x-6">
-                <Link to="/login" className="text-sm text-gray-600 hover:text-purple-600 transition">
-                  Sign In
-                </Link>
-                <Link to="/signup" className="text-sm text-gray-600 hover:text-purple-600 transition">
-                  Sign Up
-                </Link>
-              </div>
             </div>
           </div>
         </footer>
