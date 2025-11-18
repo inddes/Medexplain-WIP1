@@ -17,12 +17,20 @@ export default function Home() {
                 MedExplain
               </span>
             </div>
-            <Link
-              to="/login"
-              className="px-6 py-2 bg-white text-gray-900 rounded-full font-medium hover:shadow-lg transition-all transform hover:scale-105"
-            >
-              Sign In
-            </Link>
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/login"
+                className="px-6 py-2 bg-white text-gray-900 rounded-full font-medium hover:shadow-lg transition-all transform hover:scale-105"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/signup"
+                className="px-6 py-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-full font-medium hover:shadow-lg transition-all transform hover:scale-105"
+              >
+                Sign Up
+              </Link>
+            </div>
           </div>
         </header>
 
