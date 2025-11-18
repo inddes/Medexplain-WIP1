@@ -60,8 +60,16 @@ export default function Evidence() {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setGuidelines(data || []);
-      setFilteredGuidelines(data || []);
+
+      const formattedData = (data || []).map(item => ({
+        ...item,
+        drug: Array.isArray(item.drug) && item.drug.length > 0 ? item.drug[0] : { name: 'Unknown' },
+        gene: Array.isArray(item.gene) && item.gene.length > 0 ? item.gene[0] : { symbol: 'Unknown' },
+        source: Array.isArray(item.source) && item.source.length > 0 ? item.source[0] : { name: 'Unknown' }
+      }));
+
+      setGuidelines(formattedData);
+      setFilteredGuidelines(formattedData);
     } catch (err) {
       console.error('Error fetching guidelines:', err);
     } finally {

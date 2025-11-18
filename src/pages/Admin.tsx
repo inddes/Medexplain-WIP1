@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import Layout from '../components/Layout';
-import { Plus, Trash2, Edit2, Database, Activity, FileText, Play, Loader } from 'lucide-react';
+import { Plus, Trash2, Edit2, Database, FileText, Play, Loader } from 'lucide-react';
 
 interface Source {
   id: string;
