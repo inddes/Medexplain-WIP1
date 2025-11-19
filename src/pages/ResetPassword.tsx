@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 
-export default function Login() {
+export default function ResetPassword() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { signIn } = useAuth();
-  const navigate = useNavigate();
+  const [success, setSuccess] = useState(false);
+  const { resetPassword } = useAuth();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -16,10 +15,10 @@ export default function Login() {
     setLoading(true);
 
     try {
-      await signIn(email, password);
-      navigate('/chat');
+      await resetPassword(email);
+      setSuccess(true);
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+      setError(err.message || 'Failed to send reset email');
     } finally {
       setLoading(false);
     }
@@ -36,12 +35,18 @@ export default function Login() {
             <span className="text-white font-bold text-2xl">M</span>
           </div>
         </div>
-        <h1 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Welcome Back</h1>
-        <p className="text-gray-600 text-center mb-6">Sign in to access MedExplain</p>
+        <h1 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Reset Password</h1>
+        <p className="text-gray-600 text-center mb-6">Enter your email to receive a password reset link</p>
 
         {error && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm">
+            Password reset email sent! Check your inbox for further instructions.
           </div>
         )}
 
@@ -61,40 +66,19 @@ export default function Login() {
             />
           </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-              placeholder="••••••••"
-            />
-          </div>
-
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || success}
             className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg font-semibold hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Sending...' : 'Send Reset Link'}
           </button>
         </form>
 
-        <div className="mt-4 text-center">
-          <Link to="/reset-password" className="text-sm text-gray-500 hover:text-gray-700 transition">
-            Forgot password?
-          </Link>
-        </div>
-
         <p className="mt-6 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
-          <Link to="/signup" className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition">
-            Sign up
+          Remember your password?{' '}
+          <Link to="/login" className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition">
+            Sign in
           </Link>
         </p>
 
